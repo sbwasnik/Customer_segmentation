@@ -294,10 +294,10 @@ if st.session_state.df is not None and uploaded_file is not None:
         
         # with st.container(border=True):
         #     st.write("Preview and download the final dataset with cluster assignments and segment names.")
-        #     if st.session_state.final_rfm_segments is None: # Prepare dataframe only once
-        #         segments_df = pd.DataFrame(st.session_state.llm_segments.get('segments', [])).rename(columns={'cluster_id': 'Cluster', 'segment_name': 'Segment Name'})
-        #         final_rfm = st.session_state.rfm_with_clusters.reset_index().merge(segments_df[['Cluster', 'Segment Name']], on='Cluster', how='left')
-        #         st.session_state.final_rfm_segments = final_rfm[[col for col in final_rfm.columns if col not in ['Segment Name', 'Cluster']] + ['Cluster', 'Segment Name']]
+        if st.session_state.final_rfm_segments is None: # Prepare dataframe only once
+            segments_df = pd.DataFrame(st.session_state.llm_segments.get('segments', [])).rename(columns={'cluster_id': 'Cluster', 'segment_name': 'Segment Name'})
+            final_rfm = st.session_state.rfm_with_clusters.reset_index().merge(segments_df[['Cluster', 'Segment Name']], on='Cluster', how='left')
+            st.session_state.final_rfm_segments = final_rfm[[col for col in final_rfm.columns if col not in ['Segment Name', 'Cluster']] + ['Cluster', 'Segment Name']]
 
         #     st.dataframe(st.session_state.final_rfm_segments.head(10), use_container_width=True, hide_index=True)
             

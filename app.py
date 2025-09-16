@@ -17,9 +17,9 @@ from graphs import (
 
 
 ### Streamlit App Configuration -------------------------------------------------------------------------------------------------------------------------------------------------------------------
-st.set_page_config(page_title="Customer Segmentation Tool", layout="wide")
+st.set_page_config(page_title="Customer Segmentation", layout="wide")
 
-st.title("Customer Segmentation")
+st.title("Intelligent Customer Segmentation")
 st.write("This tool helps you segment your customers based on their purchasing behavior using Recency(last purchased date), Frequency(Number of times purchased), and Monetary(Total amount spent),  analysis combined with AI-driven insights.")
 
 # Initialize session state variables
@@ -212,7 +212,7 @@ if st.session_state.df is not None and uploaded_file is not None:
     if st.session_state.is_cluster_analysis_run:
 
         with st.container(border=True):
-            st.header("Segment Descriptions & Data")
+            st.header("Segment Descriptions & Recommendations")
             st.write("Based on the cluster analysis, here are the names and recommendations for your customer segments:")
             if st.session_state.llm_segments:
                 segments_list = st.session_state.llm_segments.get("segments", [])

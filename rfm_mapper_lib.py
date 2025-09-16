@@ -208,7 +208,7 @@ def get_llm_cluster_names(cluster_centers_json):
         # Define the user prompt
         user_query = f"Here is the average Recency, Frequency, and Monetary value for each of the customer segments:\n\n{cluster_centers_json}\n\n" \
                      "Please provide a descriptive name, a brief description of the customer type, and a marketing recommendation for each segment. " \
-                     "The names should be based on common RFM segments, such as 'Champions', 'Loyal Customers', 'About to Sleep', 'At-Risk', 'New Customers', 'Lost Customers', etc. " \
+                     "The names should be this RFM segments only ['Champions', 'Loyal Customers', 'Potential Loyalists', 'New Customers', 'Promising', 'About to Sleep', 'At-Risk Customers', 'Can't Lose Them', 'Hibernating', 'Lost Customers'] " \
                      "Return a JSON array of objects with the keys 'cluster_id', 'segment_name', 'description', and 'recommendations'."
         
         headers = {

@@ -94,7 +94,7 @@ if st.session_state.df is not None and uploaded_file is not None:
 
     # --- Section 1: RFM Mapping & Calculation ---
     st.header("Column Mapping & Calculation")
-    with st.container(border=True):
+    with st.expander("RFM Column Mapping", expanded=True):
         st.write("Please select the appropriate columns from your dataset for Recency, Frequency, and Monetary values. AI suggestions are provided to assist you.")
         
         col_recency, col_recency_ai = st.columns([0.7, 0.3], vertical_alignment="bottom")
@@ -135,16 +135,16 @@ if st.session_state.df is not None and uploaded_file is not None:
         with col_monetary_ai:
             st.info(f"AI Suggestion: **`{st.session_state.suggested_cols.get('monetary_col', 'N/A')}`**", icon="🤖")
         
-        if st.button("Calculate Metrics"):
-            if recency_col and frequency_col and monetary_col:
-                with st.spinner("Calculating scores..."):
-                    st.session_state.rfm_df = calculate_rfm_scores(st.session_state.df, recency_col, frequency_col, monetary_col)
-                if st.session_state.rfm_df is not None:
-                    st.success("RFM Metrics calculated successfully!")
-                else:
-                    st.error("Failed to calculate RFM values. Please check your column selections.") 
+    if st.button("Calculate Metrics"):
+        if recency_col and frequency_col and monetary_col:
+            with st.spinner("Calculating scores..."):
+                st.session_state.rfm_df = calculate_rfm_scores(st.session_state.df, recency_col, frequency_col, monetary_col)
+            if st.session_state.rfm_df is not None:
+                st.success("RFM Metrics calculated successfully!")
             else:
-                st.warning("Please select all three required columns.")
+                st.error("Failed to calculate RFM values. Please check your column selections.") 
+        else:
+            st.warning("Please select all three required columns.")
     
     # --- Section 2: Cluster Calculation & Personalization ---
     st.divider()
@@ -253,16 +253,17 @@ if st.session_state.df is not None and uploaded_file is not None:
                     }
 
                     .custom-table th {
-                    background-color: #f5f5f5;
+                    background-color: #000;
                     font-weight: 600;
                     }
 
                     .custom-table tr:nth-child(even) td {
-                    background-color: #fafafa; /* zebra stripe */
+                    background-color: #262730; /* zebra stripe */
                     }
 
                     .custom-table tr:hover td {
-                    background-color: #f0f8ff; /* light highlight on hover */
+                    background-color: #c3d5fa; /* light highlight on hover */
+                    color: #000;
                     }
                     </style>
                     """, unsafe_allow_html=True)
@@ -312,7 +313,7 @@ if st.session_state.df is not None and uploaded_file is not None:
     st.divider()
     if st.session_state.is_cluster_analysis_run and st.session_state.final_rfm_segments is not None:
         with st.container(border=True):
-            st.header("Cluster Visualization")
+            st.header("Segmentation Visualization")
             st.write("Explore your customer segments using the interactive visualizations below.")
             
             # tab_list = [

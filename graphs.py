@@ -7,7 +7,7 @@ import numpy as np
 
 def create_cluster_size_plot(rfm_df):
     # Define sort order for segments
-    sort_order = ["Champions", "Loyal Customers", "Potential Loyalists", "New Customers", "Promising", "About to Sleep", "At-Risk", "Can't Lose Them", "Hibernating", "Lost Customers"]
+    sort_order = ["Champions", "Loyal Customers", "Potential Loyalists", "New Customers", "Promising", "About to Sleep", "At-Risk Customers", "Can't Lose Them", "Hibernating", "Lost Customers"]
     
     # Count customers per segment
     cluster_counts = rfm_df['Segment Name'].value_counts().reset_index()
@@ -77,13 +77,15 @@ def create_segment_scatterplot(clusters_df, llm_segments):
             colorscale='Viridis',
             showscale=False,
             opacity=0.8,
-            line=dict(width=2, color='DarkSlateGrey')
+            # line=dict(width=1, color='DarkSlateGrey')
+            line=dict(width=1, color='white')
+
         ),
         text=merged_df['Segment Name'],
-        textposition='middle center',
+        textposition='bottom center',
         textfont=dict(
             size=12,
-            color='black',
+            color='white',
         ),
         hoverinfo='text',
         hovertext=[
@@ -119,14 +121,14 @@ def create_segment_scatterplot(clusters_df, llm_segments):
     fig.update_layout(
         title='Segment Scatterplot',
         xaxis=dict(
-            title='Recency (Days)',
+            title='Frequency (Days)',
             autorange='reversed', # Reversing recency to show better segments on right
             showgrid=False,
             gridcolor='lightgray',
             zeroline=False
         ),
         yaxis=dict(
-            title='Monetary Value',
+            title='Monetary  Value (USD)',
             autorange=True,
             showgrid=False,
             gridcolor='lightgray',
